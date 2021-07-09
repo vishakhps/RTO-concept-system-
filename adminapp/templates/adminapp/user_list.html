@@ -1,0 +1,121 @@
+{% extends 'adminapp/main.html' %}
+{% load static %}
+
+ {% block body_contents %}
+
+ {% include 'adminapp/left_panel.html' %}
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+       {% include 'adminapp/header.html' %}
+        <!-- Header-->
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Welcome</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">{{request.user.username}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content mt-3">
+
+            {% if messages %}
+            
+            <div class="col-sm-12">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">Success</span> 
+                    {% for message in messages %}  
+                        {{message}}
+                    {% endfor %}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            
+            {% endif %}
+
+
+        <div class="container">
+  <h1 class="margin-bottom-15" style="font-family: times;font-size: 30px;">{{page}}</h1>
+    {% comment %} <form name="searchdoctor" action="{% url 'doctorList' %}" method="get">{% csrf_token %}			  
+    {{myFilter.form}}			  
+    <input type="submit" name="go" value="Go" id="search_btn">
+    </form> {% endcomment %}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>   
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">Registration Status</th>
+            <th scope="col">Insurance Status</th>   
+            <th scope="col">Pollution Status</th>               
+            <th scope="col"></th>
+         <th scope="col"><a href="{% url 'admin-user-registration' %}" class="" style="width: 20px;font-size: .8em;border: none;background-color: rgba(173, 24, 24, 0.884);border-radius: 2px; color: white;padding: 4px;font-weight: lighter;">Add User</a></th> 
+        </tr>
+        </thead>
+        <tbody>
+            
+            {% for i in users %}
+
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.name}}</td>
+                <td>{{i.phone}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.city}}</td>
+                <td>{{i.get_registration_status}}</td>
+                <td>{{i.get_insurance_status}}</td>
+                <td>{{i.get_Pollution_status}}</td>
+                <td scope="col"></td>
+                <td><a href="{% url 'admin-user-update' i.id %}" class="btn-sm btn-info">Update</a></td>
+                {% comment %} <td><a href="" class="btn-sm btn-danger">Delete</a></td> {% endcomment %}
+            </tr>
+                
+            {% endfor %}
+                
+        
+        
+            
+            <td><hr></td>
+            
+            
+        </tr>
+        
+        </tbody>
+    </table>
+
+  
+  
+
+</div>
+
+
+        </div> <!-- .content -->
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+{% endblock body_contents %}
+
+  
